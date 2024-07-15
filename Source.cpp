@@ -8,7 +8,6 @@
 
 using namespace std;
 
-// ANSI color codes
 const string RESET = "\033[0m";
 const string RED = "\033[31m";
 const string GREEN = "\033[32m";
@@ -18,7 +17,7 @@ const string MAGENTA = "\033[35m";
 const string CYAN = "\033[36m";
 const string WHITE = "\033[37m";
 
-// Function to clear the screen (works for both Windows and Unix-like systems)
+
 void clearScreen() {
 #ifdef _WIN32
     system("cls");
@@ -44,7 +43,7 @@ void displayAsciiArt() {
  | |__| (_) | | | | || (_| | (__| |_  | |  | | (_| | | | | (_| | (_| |  __/ |   
   \____\___/|_| |_|\__\__,_|\___|\__| |_|  |_|\__,_|_| |_|\__,_|\__, |\___|_|   
                                                                 |___/   
-)" << RESET << '\n';  // Changed the color to MAGENTA
+)" << RESET << '\n';  
 }
 
 class Contact {
@@ -98,21 +97,21 @@ public:
     void addContact() {
         displayHeader("Add New Contact");
         string name, phoneNumber;
-        cout << GREEN << "Enter name: " << RESET;  // Changed the prompt color to GREEN
+        cout << GREEN << "Enter name: " << RESET;  
         clearInputBuffer();
         getline(cin, name);
-        cout << GREEN << "Enter phone number: " << RESET;  // Changed the prompt color to GREEN
+        cout << GREEN << "Enter phone number: " << RESET;  
         getline(cin, phoneNumber);
         contacts.emplace_back(name, phoneNumber);
         saveContacts();
-        cout << GREEN << "Contact added successfully.\n" << RESET;  // Changed the message color to GREEN
+        cout << GREEN << "Contact added successfully.\n" << RESET;  
         system("pause");
     }
 
     void viewContacts() const {
         displayHeader("Contact List");
         if (contacts.empty()) {
-            cout << RED << "No contacts found. Your contact list is empty.\n" << RESET;  // Changed the message color to RED
+            cout << RED << "No contacts found. Your contact list is empty.\n" << RESET;  
             system("pause");
             return;
         }
@@ -131,31 +130,31 @@ public:
         if (contacts.empty()) return;
 
         int index;
-        cout << YELLOW << "\nEnter the index number of the contact to delete (0 to cancel): " << RESET;  // Changed the prompt color to YELLOW
+        cout << YELLOW << "\nEnter the index number of the contact to delete (0 to cancel): " << RESET;  
         cin >> index;
         clearInputBuffer();
 
         if (index == 0) {
-            cout << YELLOW << "Deletion cancelled.\n" << RESET;  // Changed the message color to YELLOW
+            cout << YELLOW << "Deletion cancelled.\n" << RESET;  
             system("pause");
             return;
         }
         if (index >= 1 && index <= static_cast<int>(contacts.size())) {
-            cout << RED << "Are you sure you want to delete " << contacts[index - 1].getName() << "? (y/n): " << RESET;  // Changed the prompt color to RED
+            cout << RED << "Are you sure you want to delete " << contacts[index - 1].getName() << "? (y/n): " << RESET;  
             char confirm;
             cin >> confirm;
             clearInputBuffer();
             if (confirm == 'y' || confirm == 'Y') {
                 contacts.erase(contacts.begin() + index - 1);
                 saveContacts();
-                cout << RED << "Contact deleted successfully.\n" << RESET;  // Changed the message color to RED
+                cout << RED << "Contact deleted successfully.\n" << RESET;  
             }
             else {
-                cout << YELLOW << "Deletion cancelled.\n" << RESET;  // Changed the message color to YELLOW
+                cout << YELLOW << "Deletion cancelled.\n" << RESET;  
             }
         }
         else {
-            cout << RED << "Invalid contact number.\n" << RESET;  // Changed the message color to RED
+            cout << RED << "Invalid contact number.\n" << RESET;  
         }
         system("pause");
     }
@@ -163,12 +162,12 @@ public:
     void searchContact() {
         displayHeader("Search Contact");
         string searchTerm;
-        cout << GREEN << "Enter name or phone number to search: " << RESET;  // Changed the prompt color to GREEN
+        cout << GREEN << "Enter name or phone number to search: " << RESET;  
         clearInputBuffer();
         getline(cin, searchTerm);
 
         bool found = false;
-        cout << "\n" << CYAN << "--- Search Results ---" << RESET << "\n";  // Changed the message color to CYAN
+        cout << "\n" << CYAN << "--- Search Results ---" << RESET << "\n";  
         for (const auto& contact : contacts) {
             if (contact.getName().find(searchTerm) != string::npos ||
                 contact.getPhoneNumber().find(searchTerm) != string::npos) {
@@ -178,7 +177,7 @@ public:
             }
         }
         if (!found) {
-            cout << RED << "No matching contacts found.\n" << RESET;  // Changed the message color to RED
+            cout << RED << "No matching contacts found.\n" << RESET;  
         }
         system("pause");
     }
@@ -209,13 +208,13 @@ private:
 
     void setInitialCredentials() {
         displayHeader("Set Admin Credentials");
-        cout << YELLOW << "No admin credentials found. Please set them now.\n" << RESET;  // Changed the message color to YELLOW
-        cout << GREEN << "Enter new username: " << RESET;  // Changed the prompt color to GREEN
+        cout << YELLOW << "No admin credentials found. Please set them now.\n" << RESET;  
+        cout << GREEN << "Enter new username: " << RESET;  
         cin >> username;
-        cout << GREEN << "Enter new password: " << RESET;  // Changed the prompt color to GREEN
+        cout << GREEN << "Enter new password: " << RESET;  
         cin >> password;
         saveCredentials();
-        cout << GREEN << "Admin credentials set successfully.\n" << RESET;  // Changed the message color to GREEN
+        cout << GREEN << "Admin credentials set successfully.\n" << RESET;  
         system("pause");
 
         clearScreen();
@@ -231,9 +230,9 @@ public:
     bool login() {
         displayHeader("Admin Login");
         string inputUsername, inputPassword;
-        cout << GREEN << "Enter username: " << RESET;  // Changed the prompt color to GREEN
+        cout << GREEN << "Enter username: " << RESET;  
         cin >> inputUsername;
-        cout << GREEN << "Enter password: " << RESET;  // Changed the prompt color to GREEN
+        cout << GREEN << "Enter password: " << RESET;  
         cin >> inputPassword;
         return (inputUsername == username && inputPassword == password);
     }
@@ -241,20 +240,20 @@ public:
     void changeCredentials() {
         displayHeader("Change Admin Credentials");
         string newUsername, newPassword;
-        cout << GREEN << "Enter new username: " << RESET;  // Changed the prompt color to GREEN
+        cout << GREEN << "Enter new username: " << RESET;  
         cin >> newUsername;
-        cout << GREEN << "Enter new password: " << RESET;  // Changed the prompt color to GREEN
+        cout << GREEN << "Enter new password: " << RESET;  
         cin >> newPassword;
         username = newUsername;
         password = newPassword;
         saveCredentials();
-        cout << GREEN << "Admin credentials changed successfully.\n" << RESET;  // Changed the message color to GREEN
+        cout << GREEN << "Admin credentials changed successfully.\n" << RESET;  
         system("pause");
     }
 
     void adminPanel(ContactManager& manager) {
         if (!login()) {
-            cout << RED << "Login failed. Access denied.\n" << RESET;  // Changed the message color to RED
+            cout << RED << "Login failed. Access denied.\n" << RESET;  
             system("pause");
             return;
         }
@@ -271,7 +270,7 @@ public:
             cout << "Enter your choice (1-6): ";
 
             if (!(cin >> choice)) {
-                cout << RED << "Invalid input. Please enter a number.\n" << RESET;  // Changed the message color to RED
+                cout << RED << "Invalid input. Please enter a number.\n" << RESET;  
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 continue;
@@ -285,7 +284,7 @@ public:
             case 4: manager.searchContact(); break;
             case 5: changeCredentials(); break;
             case 6: return;
-            default: cout << RED << "Invalid choice. Please try again.\n" << RESET;  // Changed the message color to RED
+            default: cout << RED << "Invalid choice. Please try again.\n" << RESET;  
             }
         }
     }
@@ -303,7 +302,7 @@ public:
             cout << "Enter your choice (1-3): ";
 
             if (!(cin >> choice)) {
-                cout << RED << "Invalid input. Please enter a number.\n" << RESET;  // Changed the message color to RED
+                cout << RED << "Invalid input. Please enter a number.\n" << RESET;  
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 continue;
@@ -314,7 +313,7 @@ public:
             case 1: manager.viewContacts(); break;
             case 2: manager.searchContact(); break;
             case 3: return;
-            default: cout << RED << "Invalid choice. Please try again.\n" << RESET;  // Changed the message color to RED
+            default: cout << RED << "Invalid choice. Please try again.\n" << RESET;  
             }
         }
     }
@@ -327,7 +326,7 @@ int main() {
     int choice;
 
     displayAsciiArt();
-    cout << GREEN << "Welcome to the Contact Management System!\n" << RESET;  // Changed the message color to GREEN
+    cout << GREEN << "Welcome to the Contact Management System!\n" << RESET;  
     system("pause");
 
     while (true) {
@@ -338,7 +337,7 @@ int main() {
         cout << "Enter your choice (1-3): ";
 
         if (!(cin >> choice)) {
-            cout << RED << "Invalid input. Please enter a number.\n" << RESET;  // Changed the message color to RED
+            cout << RED << "Invalid input. Please enter a number.\n" << RESET; 
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
@@ -350,10 +349,10 @@ int main() {
         case 2: customer.customerPanel(manager); break;
         case 3:
             displayHeader("Thank You");
-            cout << GREEN << "Thank you for using the Contact Management System. Goodbye!\n" << RESET;  // Changed the message color to GREEN
+            cout << GREEN << "Thank you for using the Contact Management System. Goodbye!\n" << RESET; 
             return 0;
         default:
-            cout << RED << "Invalid choice. Please try again.\n" << RESET;  // Changed the message color to RED
+            cout << RED << "Invalid choice. Please try again.\n" << RESET; 
             system("pause");
         }
     }
